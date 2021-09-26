@@ -19,4 +19,9 @@ public class BlogController {
         model.addAttribute("posts", posts);
         return "blog-main";
     }
+
+    @GetMapping("/blog/add")
+    public String addBlog(Model model) {
+        return "blog-add";
+    }
 }
