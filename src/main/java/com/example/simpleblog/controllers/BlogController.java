@@ -16,8 +16,12 @@ import java.util.Optional;
 @Controller
 public class BlogController {
 
-    @Autowired
     private PostRepositories postRepositories;
+
+    @Autowired
+    public BlogController(PostRepositories postRepositories) {
+        this.postRepositories = postRepositories;
+    }
 
     @GetMapping("/blog")
     public String getBlog(Model model) {
@@ -78,6 +82,12 @@ public class BlogController {
         post.setAnons(anons);
         post.setFullText(full_text);
         postRepositories.save(post);
+        return "redirect:/blog";
+    }
+
+    @PostMapping("/blog/{id}/remove")
+    public String removeBlod(@PathVariable(value = "id") Long id, Model model) {
+        postRepositories.deleteById(id);
         return "redirect:/blog";
     }
 }
